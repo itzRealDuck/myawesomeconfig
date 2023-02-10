@@ -11,6 +11,12 @@
     htop 
  nixpkgs-f2k.packages.${pkgs.system}.awesome-git
     jetbrains.idea-ultimate
+lxappearance 
+numix-icon-theme-circle
+  flat-remix-icon-theme 
+qt5ct
+shutter 
+
 
   ];
 
@@ -33,5 +39,23 @@
   home.stateVersion = "22.11";
 
   # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-}
+  programs.home-manager.enable = true; 
+# GTK 
+gtk = {
+    enable = true;
+    font.name = "font-awesome";
+
+    gtk3.extraConfig = { gtk-decoration-layout = "menu:"; };
+
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+
+    theme = {
+      name = "Adwaita-Dark";
+      
+
+}; 
+}; 
+
