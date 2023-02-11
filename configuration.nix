@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, lib, home-manager,... }:
 
 {
   imports =
@@ -49,7 +49,16 @@
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true; 
+services.xserver.windowManager = {
+        awesome = {
+          enable = true;
+          package = inputs.nixpkgs-f2k.packages.${pkgs.system}.awesome-git;
 
+          luaModules = lib.attrValues {
+            inherit (pkgs.luaPackages) lgi ldbus luadbi-mysql luaposix;
+          };
+        };
+      };
 
 
   # Configure keymap in X11
@@ -115,7 +124,21 @@ jdk17_headless
 jdk 
 flatpak 
 home-manager
-  ];
+  ]; 
+
+  fonts.fonts = with pkgs; [
+  noto-fonts
+  noto-fonts-cjk
+  noto-fonts-emoji
+  liberation_ttf
+  fira-code
+  fira-code-symbols
+  mplus-outline-fonts.githubRelease
+  dina-font
+  proggyfonts 
+  google-fonts 
+  font-awesome
+];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

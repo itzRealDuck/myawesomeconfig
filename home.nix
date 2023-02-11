@@ -1,5 +1,5 @@
 { nixpkgs-f2k, ... }:
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, outputs, lib, ... }:
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -40,7 +40,8 @@ shutter
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true; 
-# GTK 
+# GTK  
+  home-manager.users.itzrealduck = {
 gtk = {
     enable = true;
     font.name = "font-awesome";
@@ -57,5 +58,8 @@ gtk = {
       
 
 }; 
+};  
 }; 
+}
+
 
